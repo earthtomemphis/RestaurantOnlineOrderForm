@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Order Form</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit">
+</form>
+{% endblock %}
