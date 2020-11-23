@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView
+from django import forms
+from django.http import HttpResponse
+from django.urls import reverse_lazy
 from . models import Menu, Order
 from . forms import OrderForm
 
@@ -17,4 +20,10 @@ class HomeView(ListView):
 class OrderView(CreateView):
     model = Order
     form_class = OrderForm
+    
+    def order_valid(self, form):
+        if request.method == 'POST':
+            form = OrderForm(request.POST)
+            if form.is_valid():
+                form.save()
     template_name = 'order.html'
